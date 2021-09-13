@@ -6,6 +6,7 @@ import com.maintaining.domainValues.OnlineStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface DriverRepository extends JpaRepository<Driver, Long> {
@@ -20,6 +21,8 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
     List<Driver> findByAndCar_Convertible(boolean convertible);
 
     List<Driver> findByAndCar_Rating(BigDecimal rating);
+
+    List<Driver> findByDateCreated(ZonedDateTime zonedDateTime);
 
     List<Driver> findByAndCar_EngineTypeAndCar_Manufacturer(Enginetype enginetype,String manufacturerName);
 

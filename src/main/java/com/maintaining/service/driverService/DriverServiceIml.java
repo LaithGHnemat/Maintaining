@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,10 @@ public abstract class DriverServiceIml implements DriverService {
     }
     public  List<Driver> findDriversByRatingCars(BigDecimal rating){
         return driverRepository.findByAndCar_Rating(rating);
+    }
+
+    public  List<Driver> findDriversByDateCreated(ZonedDateTime zonedDateTime){
+        return driverRepository.findByDateCreated(zonedDateTime);
     }
 
     public  List<Driver> findDriversEngineTypeAndManufacturer(Enginetype enginetype, String mnf){
