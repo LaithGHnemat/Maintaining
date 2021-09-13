@@ -16,6 +16,7 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Builder
 public class Driver {
 
     @Id

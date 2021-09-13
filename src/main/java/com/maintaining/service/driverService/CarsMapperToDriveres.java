@@ -5,6 +5,7 @@ import com.maintaining.domain.Driver;
 import com.maintaining.domainValues.CarStatus;
 import com.maintaining.domainValues.OnlineStatus;
 import com.maintaining.exceptions.CarAlreadyInUseException;
+import com.maintaining.exceptions.ConstraintsViolationException;
 import com.maintaining.exceptions.OfflineDriverExceptoin;
 import com.maintaining.exceptions.RemoveCarException;
 import com.maintaining.repository.DriverRepository;
@@ -27,7 +28,7 @@ public class CarsMapperToDriveres extends DriverServiceIml{
     }
     @Override
     @Transactional
-    public Driver deselectCar(Driver driver, Car car) {
+    public Driver deselectCar(Driver driver, Car car)  {
         checkDriverHaveCar(driver);
         checkSameCar(driver, car);
         return doneDeleteTransaction(driver, car);

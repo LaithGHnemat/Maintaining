@@ -38,7 +38,7 @@ public class DriverController {
 
     @GetMapping("/drivers/{driverId}")
     public ResponseEntity<DriverDot> getDriver(@Valid @PathVariable(value = "driverId") Long driverId)
-            throws NotFoundCarException {
+            throws NotFoundDriverExpetion {
         DriverDot driverDot = driverMapper.mapToDto(driverService.getItemById(driverId));
         return ResponseEntity.ok(driverDot);
     }
@@ -52,13 +52,13 @@ public class DriverController {
 
     @DeleteMapping("/drivers/{id}")
     public Map<String, Boolean> deleteDriver(@Valid @PathVariable(value = "id") Long driverId)
-            throws NotFoundCarException {
+            throws  NotFoundDriverExpetion {
         return driverService.deleteItem(driverId);
     }
 
     @PutMapping("/drivers")
     public ResponseEntity<DriverDot> updateDriver(@Valid @RequestBody DriverDot driverDot)
-            throws NotFoundCarException, ConstraintsViolationException {
+            throws NotFoundDriverExpetion, ConstraintsViolationException {
         Driver driver = driverService.getItemById(driverDot.getDriverId());
         Driver mapperDriver = driverMapper.mapToUpdate(driverDot, driver);
         DriverDot dto = driverMapper.mapToDto(driverService.updateItem(mapperDriver));
@@ -66,7 +66,7 @@ public class DriverController {
     }
 
     @PutMapping("/drivers/mapCar/{driverId}/{carId}")
-    public ResponseEntity<DriverDot> mapCar(@Valid @PathVariable Long driverId, @Valid @PathVariable Long carId) throws CarAlreadyInUseException, OfflineDriverExceptoin {
+    public ResponseEntity<DriverDot> mapCar(@Valid @PathVariable Long driverId, @Valid @PathVariable Long carId) throws CarAlreadyInUseException, OfflineDriverExceptoin, ConstraintsViolationException, NotFoundDriverExpetion {
         Driver driver = driverService.getItemById(driverId);
         Car car = carService.getItemById(carId);
         DriverDot dto = driverMapper.mapToDto(driverService.mapCar(driver, car));
@@ -74,7 +74,7 @@ public class DriverController {
     }
 
     @PutMapping("/drivers/deselectCar/{driverId}/{carId}")
-    public ResponseEntity<DriverDot> deselectCar(@Valid @PathVariable Long driverId, @Valid @PathVariable Long carId) {
+    public ResponseEntity<DriverDot> deselectCar(@Valid @PathVariable Long driverId, @Valid @PathVariable Long carId) throws ConstraintsViolationException, NotFoundDriverExpetion {
         Driver driver = driverService.getItemById(driverId);
         Car car = carService.getItemById(carId);
         DriverDot dto = driverMapper.mapToDto(driverService.deselectCar(driver, car));

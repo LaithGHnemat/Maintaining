@@ -24,6 +24,7 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Builder
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

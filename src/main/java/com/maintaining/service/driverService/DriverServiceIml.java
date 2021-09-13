@@ -4,7 +4,9 @@ import com.maintaining.domain.Driver;
 
 import com.maintaining.domainValues.Enginetype;
 import com.maintaining.domainValues.OnlineStatus;
+import com.maintaining.exceptions.ConstraintsViolationException;
 import com.maintaining.exceptions.NotFoundCarException;
+import com.maintaining.exceptions.NotFoundDriverExpetion;
 import com.maintaining.repository.DriverRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,9 +32,9 @@ public abstract class DriverServiceIml implements DriverService {
     }
 
     @Override
-    public Driver getItemById(long id) {
+    public Driver getItemById(long id) throws NotFoundDriverExpetion {
         Driver driver = driverRepository.findById(id)
-                .orElseThrow(() -> new NotFoundCarException("driver is not found for this id = " + id));
+                .orElseThrow(() -> new NotFoundDriverExpetion("driver is not found for this id = " + id));
         return driver;
     }
 
@@ -42,9 +44,9 @@ public abstract class DriverServiceIml implements DriverService {
     }
 
     @Override
-    public Map<String, Boolean> deleteItem(long id) {
+    public Map<String, Boolean> deleteItem(long id) throws NotFoundDriverExpetion {
         Driver driver = driverRepository.findById(id)
-                .orElseThrow(() -> new NotFoundCarException("driver not found for this id :: " + id));
+                .orElseThrow(() -> new NotFoundDriverExpetion("driver not found for this id :: " + id));
         driverRepository.delete(driver);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
