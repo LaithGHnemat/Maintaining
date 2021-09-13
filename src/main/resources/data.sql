@@ -67,4 +67,4 @@ VALUES (true, 'ONLINE', '09OK76GF', 'Ammar', 31);
 INSERT INTO driver_tabel (has_car_now, online_status, password, username, car_id)
 VALUES (true, 'ONLINE', 'SDWX87JE2', 'Yamen', 32);
 
--- those are the driver who took the cars at the top, and couz of them u can't choose between cars with id(30,31,32)
+-- those are the drivers who took the cars at the top, and couz of them u can't choose between cars with id(30,31,32)
