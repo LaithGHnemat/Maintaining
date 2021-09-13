@@ -69,7 +69,7 @@ class DriverServiceImlTest {
     }
 
     @Test
-    public void whenGivenUnValidDataDriverToUpdateThenRejecUpdateTransaction() {
+    public void whenGivenUnValidDataDriverToUpdateThenRejectUpdateTransaction() {
         this.driver = Driver.builder()
                 .id(this.driver.getId())
                 .hasCarNow(true)
@@ -82,7 +82,7 @@ class DriverServiceImlTest {
     }
 
     @Test
-    public void whenGivenValiedDriverToUpdateThenUpdateSuccessfully() throws ConstraintsViolationException, NotFoundDriverExpetion {
+    public void whenGivenValidDriverToUpdateThenUpdateSuccessfully() throws ConstraintsViolationException, NotFoundDriverExpetion {
         this.driver = Driver.builder()
                 .id(this.driver.getId())
                 .hasCarNow(true)
@@ -98,12 +98,12 @@ class DriverServiceImlTest {
     }
 
     @Test
-    public void givenNotFoundDriverIdWhenSelectItThenExeption() {
+    public void givenNotFoundDriverIdWhenSelectItThenException() {
         assertThrows(NotFoundDriverExpetion.class, () -> driverService.getItemById(driver.getId() + driver1.getId()));
     }
 
     @Test
-    public void givenDriverIdWhenSelectItThenSlecetIt() throws NotFoundDriverExpetion {
+    public void givenDriverIdWhenSelectItThenSelectIt() throws NotFoundDriverExpetion {
         Driver d = driverService.getItemById(driver.getId());
         assertEquals(d.getId(), d.getId());
         assertEquals(d.getUsername(), d.getUsername());
@@ -112,13 +112,13 @@ class DriverServiceImlTest {
     }
 
     @Test
-    public void whenSelectAllDriversThenSlecetThem() {
+    public void whenSelectAllDriversThenSelectThem() {
         List<Driver> d = driverService.getAllItems();
         assertEquals(3, d.size());
     }
 
     @Test
-    public void whenSelectDriversByThereStayusThenGetThem() throws NotFoundDriverExpetion {
+    public void whenSelectDriversByThereStatusThenGetThem(){
         List<Driver> drivers = driverRepository.findByOnlineStatus(OnlineStatus.ONLINE);
         assertEquals(2, drivers.size());
     }
@@ -136,7 +136,7 @@ class DriverServiceImlTest {
     }
 
     @Test
-    public void whenSelectDriversByCarsCharacteristics() throws NotFoundDriverExpetion {
+    public void whenSelectDriversByCarsCharacteristics()  {
         driverRepository.deleteAll();
         carRepository.deleteAll();
 

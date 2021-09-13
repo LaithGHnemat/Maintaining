@@ -1,6 +1,5 @@
 package com.maintaining.dao;
 
-import com.maintaining.exceptions.ConstraintsViolationException;
 import com.maintaining.exceptions.NotFoundDriverExpetion;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public interface GenericDao<T> {
 
     T getItemById(long id) throws NotFoundDriverExpetion;
 
-    T updateItem(T item) throws ConstraintsViolationException;
+    T updateItem(T item) ;
 
     Map<String, Boolean> deleteItem(long id) throws NotFoundDriverExpetion;
 

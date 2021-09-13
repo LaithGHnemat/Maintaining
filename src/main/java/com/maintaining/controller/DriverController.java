@@ -44,7 +44,7 @@ public class DriverController {
     }
 
     @PostMapping("drivers")
-    public ResponseEntity<DriverDot> addCar(@Valid @RequestBody DriverDot driverDot) throws ConstraintsViolationException {
+    public ResponseEntity<DriverDot> addCar(@Valid @RequestBody DriverDot driverDot){
         Driver driver = driverMapper.mapToEntity(driverDot);
         DriverDot dto = driverMapper.mapToDto(driverService.insertItem(driver));
         return new ResponseEntity<>(dto, HttpStatus.OK);
@@ -58,7 +58,7 @@ public class DriverController {
 
     @PutMapping("/drivers")
     public ResponseEntity<DriverDot> updateDriver(@Valid @RequestBody DriverDot driverDot)
-            throws NotFoundDriverExpetion, ConstraintsViolationException {
+            throws NotFoundDriverExpetion{
         Driver driver = driverService.getItemById(driverDot.getDriverId());
         Driver mapperDriver = driverMapper.mapToUpdate(driverDot, driver);
         DriverDot dto = driverMapper.mapToDto(driverService.updateItem(mapperDriver));
@@ -82,56 +82,56 @@ public class DriverController {
     }
 
     @GetMapping("/drivers/findByCarId/{carId}")
-    public Driver findByCarId(@Valid @PathVariable Long carId) throws ConstraintsViolationException, NotFoundDriverExpetion {
+    public Driver findByCarId(@Valid @PathVariable Long carId)  {
         return driverService.findDriverByCarId(carId);
     }
 
     @GetMapping("/drivers/manufacturer/{mnf}")
-    public ResponseEntity<List<DriverDot>> findByManufacturer(@Valid @PathVariable String mnf) throws ConstraintsViolationException, NotFoundDriverExpetion {
+    public ResponseEntity<List<DriverDot>> findByManufacturer(@Valid @PathVariable String mnf)  {
         List<DriverDot> dto = driverMapper.mapListToDot(driverService.findDriverByManufacturer(mnf));
         return new ResponseEntity<>(dto, HttpStatus.OK);
 
     }
 
     @GetMapping("/drivers/Enginetype/{enginetype}")
-    public ResponseEntity<List<DriverDot>> findByEngineType(@Valid @PathVariable Enginetype enginetype) throws ConstraintsViolationException, NotFoundDriverExpetion {
+    public ResponseEntity<List<DriverDot>> findByEngineType(@Valid @PathVariable Enginetype enginetype)  {
         List<DriverDot> dto = driverMapper.mapListToDot(driverService.findDriversEnginetype(enginetype));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("/drivers/SeatCount/{seatCount}")
-    public ResponseEntity<List<DriverDot>> findBySeatCount(@Valid @PathVariable int seatCount) throws ConstraintsViolationException, NotFoundDriverExpetion {
+    public ResponseEntity<List<DriverDot>> findBySeatCount(@Valid @PathVariable int seatCount) {
         List<DriverDot> dto = driverMapper.mapListToDot(driverService.findDriversBySeatCount(seatCount));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("/drivers/Convertible/{convertible}")
-    public ResponseEntity<List<DriverDot>> findByConvertible(@Valid @PathVariable boolean convertible) throws ConstraintsViolationException, NotFoundDriverExpetion {
+    public ResponseEntity<List<DriverDot>> findByConvertible(@Valid @PathVariable boolean convertible) {
         List<DriverDot> dto = driverMapper.mapListToDot(driverService.findDriversHaveConvertibleCars(convertible));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("/drivers/Rating/{rating}")
-    public ResponseEntity<List<DriverDot>> findByRating(@Valid @PathVariable BigDecimal rating) throws ConstraintsViolationException, NotFoundDriverExpetion {
+    public ResponseEntity<List<DriverDot>> findByRating(@Valid @PathVariable BigDecimal rating) {
         List<DriverDot> dto = driverMapper.mapListToDot(driverService.findDriversByRatingCars(rating));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("/drivers/findDriversByStatus/{onlineStatus}")
-    public ResponseEntity<List<DriverDot>> findDriversByStatus(@Valid @PathVariable OnlineStatus onlineStatus) throws ConstraintsViolationException, NotFoundDriverExpetion {
+    public ResponseEntity<List<DriverDot>> findDriversByStatus(@Valid @PathVariable OnlineStatus onlineStatus)  {
         List<DriverDot> dto = driverMapper.mapListToDot(driverService.findDriversByStatus(onlineStatus));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("/drivers/EnginetypeAndManufacturer/{enginetype}/{manufacturer}")
-    public ResponseEntity<List<DriverDot>> findByEngineTypeAndManufacturer(@Valid @PathVariable Enginetype enginetype, @Valid @PathVariable String manufacturer) throws ConstraintsViolationException, NotFoundDriverExpetion {
+    public ResponseEntity<List<DriverDot>> findByEngineTypeAndManufacturer(@Valid @PathVariable Enginetype enginetype, @Valid @PathVariable String manufacturer)  {
         List<DriverDot> dto = driverMapper.mapListToDot(driverService.findDriversEngineTypeAndManufacturer(enginetype, manufacturer));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("/drivers/findDriversByStatus/{onlineStatus}/{hasCar}")
     public ResponseEntity<List<DriverDot>> findDriversByStatusAndHasCar(@Valid @PathVariable OnlineStatus onlineStatus, @Valid @PathVariable boolean hasCar)
-            throws ConstraintsViolationException, NotFoundDriverExpetion {
+            {
         List<DriverDot> dto = driverMapper.mapListToDot(driverService.getDriverByStatusAndHasCar(onlineStatus, hasCar));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
@@ -139,7 +139,7 @@ public class DriverController {
     @GetMapping("/drivers/findDriversByStatus/{onlineStatus}/{hasCar}/{password}")
     public ResponseEntity<List<DriverDot>> findDriversByStatusAndHasCarOrPassord
             (@Valid @PathVariable OnlineStatus onlineStatus, @Valid @PathVariable boolean hasCar, @Valid @PathVariable String password)
-            throws ConstraintsViolationException, NotFoundDriverExpetion {
+             {
         List<DriverDot> dto = driverMapper.mapListToDot(driverService.getDriverByStatusAndHasCarOrPassword(onlineStatus, hasCar, password));
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }

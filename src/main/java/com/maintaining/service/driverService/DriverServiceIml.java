@@ -1,11 +1,8 @@
 package com.maintaining.service.driverService;
 
 import com.maintaining.domain.Driver;
-
 import com.maintaining.domainValues.Enginetype;
 import com.maintaining.domainValues.OnlineStatus;
-import com.maintaining.exceptions.ConstraintsViolationException;
-import com.maintaining.exceptions.NotFoundCarException;
 import com.maintaining.exceptions.NotFoundDriverExpetion;
 import com.maintaining.repository.DriverRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +24,7 @@ public abstract class DriverServiceIml implements DriverService {
     public Driver insertItem(Driver driver) {
         return this.driverRepository.save(driver);
     }
+
     @Override
     public List<Driver> getAllItems() {
         return this.driverRepository.findAll();
@@ -54,41 +52,48 @@ public abstract class DriverServiceIml implements DriverService {
         return response;
     }
 
-    public Driver findDriverByCarId(long carId){
+    public Driver findDriverByCarId(long carId) {
         return driverRepository.findByAndCar_CarId(carId);
     }
-    public  List<Driver>findDriverByManufacturer(String manufacturer){
+
+    public List<Driver> findDriverByManufacturer(String manufacturer) {
         return driverRepository.findByAndCar_Manufacturer(manufacturer);
     }
-    public  List<Driver> findDriversBySeatCount(int seatCount){
+
+    public List<Driver> findDriversBySeatCount(int seatCount) {
         return driverRepository.findByAndCar_SeatCount(seatCount);
     }
-    public  List<Driver> findDriversHaveConvertibleCars(boolean convertible){
+
+    public List<Driver> findDriversHaveConvertibleCars(boolean convertible) {
         return driverRepository.findByAndCar_Convertible(convertible);
     }
-    public  List<Driver> findDriversEnginetype(Enginetype enginetype){
+
+    public List<Driver> findDriversEnginetype(Enginetype enginetype) {
         return driverRepository.findByAndCar_EngineType(enginetype);
     }
-    public  List<Driver> findDriversByRatingCars(BigDecimal rating){
+
+    public List<Driver> findDriversByRatingCars(BigDecimal rating) {
         return driverRepository.findByAndCar_Rating(rating);
     }
 
-    public  List<Driver> findDriversByDateCreated(ZonedDateTime zonedDateTime){
+    public List<Driver> findDriversByDateCreated(ZonedDateTime zonedDateTime) {
         return driverRepository.findByDateCreated(zonedDateTime);
     }
 
-    public  List<Driver> findDriversEngineTypeAndManufacturer(Enginetype enginetype, String mnf){
-        return driverRepository.findByAndCar_EngineTypeAndCar_Manufacturer(enginetype,mnf);
+    public List<Driver> findDriversEngineTypeAndManufacturer(Enginetype enginetype, String mnf) {
+        return driverRepository.findByAndCar_EngineTypeAndCar_Manufacturer(enginetype, mnf);
     }
 
-    public List<Driver> findDriversByStatus(OnlineStatus onlineStatus){
+    public List<Driver> findDriversByStatus(OnlineStatus onlineStatus) {
         return driverRepository.findByOnlineStatus(onlineStatus);
     }
-    public List<Driver> getDriverByStatusAndHasCar(OnlineStatus onlineStatus,boolean hasCar){
-        return driverRepository.findByOnlineStatusAndHasCarNow(onlineStatus,hasCar);
+
+    public List<Driver> getDriverByStatusAndHasCar(OnlineStatus onlineStatus, boolean hasCar) {
+        return driverRepository.findByOnlineStatusAndHasCarNow(onlineStatus, hasCar);
     }
-    public List<Driver> getDriverByStatusAndHasCarOrPassword(OnlineStatus onlineStatus,boolean hasCar,String password){
-        return driverRepository.findByOnlineStatusAndHasCarNowOrPassword(onlineStatus,hasCar,password);
+
+    public List<Driver> getDriverByStatusAndHasCarOrPassword(OnlineStatus onlineStatus, boolean hasCar, String password) {
+        return driverRepository.findByOnlineStatusAndHasCarNowOrPassword(onlineStatus, hasCar, password);
     }
 
 }

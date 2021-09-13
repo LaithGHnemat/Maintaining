@@ -40,7 +40,7 @@ public class CarController {
     }
 
     @PostMapping("cars")
-    public ResponseEntity<CarDto> addCar(@Valid @RequestBody CarDto carDto) throws ConstraintsViolationException {
+    public ResponseEntity<CarDto> addCar(@Valid @RequestBody CarDto carDto)  {
         Car car = carMapper.mapToEntity(carDto);
         CarDto c = carMapper.mapToDto(carService.insertItem(car));
         return new ResponseEntity<>(c, HttpStatus.OK);
@@ -54,7 +54,7 @@ public class CarController {
 
     @PutMapping("/cars")
     public ResponseEntity<CarDto> updateCar(@Valid @RequestBody CarDto dto)
-            throws NotFoundCarException, ConstraintsViolationException {
+            throws NotFoundCarException {
         Car car = carService.getItemById(dto.getCarDtoId());
         Car mapperCar = carMapper.mapToUpdate(dto, car);
         CarDto carDto = carMapper.mapToDto(carService.updateItem(mapperCar));
